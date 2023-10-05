@@ -8,7 +8,7 @@ Dentro de la carpeta root del repositorio ejecutar
 
 ## Demo
 
-http://52.23.180.101:8501/
+
 
 ## Propuesta de proyecto
 
