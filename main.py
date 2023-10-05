@@ -49,7 +49,7 @@ with st.container():
             st.markdown("")
             send = st.button("generar", type="secondary")
         with col12:
-            st.markdown(### Colocar algo)
+            st.markdown("### Colocar algo")
 
         if send:
             # st.markdown(f"### {init_prompt}")
