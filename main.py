@@ -1,6 +1,6 @@
-import pandas
+import os
 import pandas as pd
-
+from PIL import Image
 import openai_con
 import prodia_con
 import streamlit as st
@@ -12,6 +12,12 @@ st.set_page_config(page_title="Glamify",
 
 delay = 10
 list_url = []
+
+
+def load_image(image_file):
+    img = Image.open(image_file)
+    return img
+
 
 st.header('💄 Glamify', divider='rainbow')
 st.markdown("Una aplicación que te hace lucir glamorosa, usando inteligencia artificial"
@@ -70,7 +76,26 @@ with st.container():
                 list_url.append(response_url_img)
 
     with col2:
-        st.markdown("### Prueba muchas combinaciones")
+        st.markdown("### Sube una imagen:")
+        image_file = st.file_uploader("Upload Images", type=["png", "jpg", "jpeg"])
+
+        if image_file is not None:
+            # To See details
+            file_details = {"filename": image_file.name,
+                            "filetype": image_file.type,
+                            "filesize": image_file.size}
+
+            st.write(file_details)
+
+            # To View Uploaded Image
+            st.image(load_image(image_file), width=250)
+
+            # Saving upload
+            with open(os.path.join("input_img/", image_file.name), "wb") as f:
+                f.write(image_file.getbuffer())
+
+            st.success("File Saved")
+
         with st.container():
             col1, col2 = st.columns(2)
 
@@ -94,4 +119,3 @@ with st.container():
                 st.button("👩🏼‍ contactar tu consultora", type="primary")
 
             st.success('Listo!')
-
